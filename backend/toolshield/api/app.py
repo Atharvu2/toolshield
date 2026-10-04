@@ -28,38 +28,43 @@ def benchmark():
 
 @app.post("/api/analyze")
 async def analyze_repo(file: UploadFile = File(...)):
-    if not file.filename.endswith(".zip"):
-        return {"error": "Only .zip files are supported"}
-        
-    with tempfile.TemporaryDirectory() as temp_dir:
-        temp_path = Path(temp_dir)
-        
-        # Save zip
-        zip_path = temp_path / "upload.zip"
-        with open(zip_path, "wb") as f:
-            shutil.copyfileobj(file.file, f)
+    try:
+        if not file.filename.endswith(".zip"):
+            return {"error": "Only .zip files are supported"}
             
-        # Extract zip
-        extract_path = temp_path / "repo"
-        extract_path.mkdir()
-        try:
-            with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-                zip_ref.extractall(extract_path)
-        except Exception as e:
-            return {"error": f"Failed to extract zip: {str(e)}"}
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_path = Path(temp_dir)
             
-        # Find root directory (in case the zip contains a single root folder)
-        repo_root = extract_path
-        contents = list(extract_path.iterdir())
-        if len(contents) == 1 and contents[0].is_dir():
-            repo_root = contents[0]
+            # Save zip
+            zip_path = temp_path / "upload.zip"
+            with open(zip_path, "wb") as f:
+                content = await file.read()
+                f.write(content)
+                
+            # Extract zip
+            extract_path = temp_path / "repo"
+            extract_path.mkdir()
+            try:
+                with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+                    zip_ref.extractall(extract_path)
+            except Exception as e:
+                return {"error": f"Failed to extract zip: {str(e)}"}
+                
+            # Find root directory (in case the zip contains a single root folder)
+            repo_root = extract_path
+            contents = list(extract_path.iterdir())
+            if len(contents) == 1 and contents[0].is_dir():
+                repo_root = contents[0]
+                
+            findings = scan_repo(repo_root)
             
-        findings = scan_repo(repo_root)
-        
-        return {
-            "findings": findings,
-            "status": "success"
-        }
+            return {
+                "findings": findings,
+                "status": "success"
+            }
+    except Exception as e:
+        import traceback
+        return {"error": f"Server crash: {str(e)}", "trace": traceback.format_exc()}
 
 # Mount frontend
 frontend_dir = Path(__file__).parent.parent.parent.parent / "frontend" / "dist"
