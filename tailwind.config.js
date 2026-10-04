@@ -7,17 +7,19 @@ export default {
   theme: {
     extend: {
       colors: {
-        bg: '#F1F3F2',
-        fg: '#0E1413',
-        secondary: '#59615F',
-        muted: '#777D7B',
-        surface: '#FFFFFF',
-        border: '#D5D9D7',
+        bg:       '#F6F3EF',
+        fg:       '#0B3D3D',
+        accent:   '#0A7F7F',
+        secondary:'#3D6060',
+        muted:    '#6B8A8A',
+        surface:  '#FFFFFF',
+        border:   '#D4DDD9',
         critical: '#F0481C',
       },
       fontFamily: {
-        sans: ['Archivo', 'system-ui', 'sans-serif'],
-        mono: ['"Martian Mono"', 'monospace'],
+        serif: ['"Newsreader"', 'Georgia', 'serif'],
+        sans:  ['"IBM Plex Sans"', 'system-ui', 'sans-serif'],
+        mono:  ['"IBM Plex Mono"', 'monospace'],
       },
       gridTemplateColumns: {
         'story': 'minmax(0, 0.85fr) minmax(0, 1.35fr)',

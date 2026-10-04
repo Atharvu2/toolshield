@@ -1,28 +1,22 @@
 import { Handle, Position } from '@xyflow/react';
-import clsx from 'clsx';
 
 export default function GraphNode({ data, selected }: any) {
+  if (data.hidden) return null;
   return (
-    <div className={clsx(
-      "flex flex-col transition-all duration-300",
-      data.hidden && "opacity-0 pointer-events-none",
-      !data.hidden && "opacity-100",
-      selected && "scale-105"
-    )}>
-      <Handle type="target" position={Position.Top} className="opacity-0" />
-      <div className="flex items-center gap-4">
-        <div className={clsx(
-          "w-4 h-4 rounded-full border-2 bg-bg z-10",
-          data.critical ? "border-critical" : "border-fg"
-        )} />
-        <div className="flex flex-col">
-          <span className="font-sans font-bold text-[17px] text-fg">{data.label}</span>
-          {data.sublabel && (
-            <span className="font-mono text-[11px] text-fg/65">{data.sublabel}</span>
-          )}
-        </div>
+    <div className={`flex items-center gap-3 transition-all duration-300 ${selected ? 'scale-105' : ''}`}>
+      <Handle type="target" position={Position.Top} className="opacity-0 !w-0 !h-0" />
+      <div className={`w-3 h-3 rounded-full border-2 flex-shrink-0 transition-colors duration-300 ${
+        data.critical ? 'border-critical bg-critical/20' : 'border-fg bg-bg'
+      }`} />
+      <div className="flex flex-col">
+        <span className={`font-sans font-semibold text-[15px] leading-tight transition-colors duration-300 ${
+          data.critical ? 'text-critical' : 'text-fg'
+        }`}>{data.label}</span>
+        {data.sublabel && (
+          <span className="font-mono text-[11px] text-muted leading-tight mt-0.5">{data.sublabel}</span>
+        )}
       </div>
-      <Handle type="source" position={Position.Bottom} className="opacity-0" />
+      <Handle type="source" position={Position.Bottom} className="opacity-0 !w-0 !h-0" />
     </div>
   );
 }

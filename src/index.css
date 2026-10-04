@@ -6,11 +6,28 @@
   body {
     @apply bg-bg text-fg font-sans antialiased m-0;
   }
+  h1, h2, h3 {
+    @apply font-serif;
+  }
 }
 
+/* Tooltip underline */
+.term {
+  @apply border-b border-dotted border-accent cursor-help;
+}
+
+/* React Flow overrides */
 .react-flow__pane {
   background: transparent !important;
 }
 .react-flow__edge-path {
-  stroke-width: 3;
+  stroke-width: 2.5;
+}
+.react-flow__background {
+  opacity: 0.4;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
 }
