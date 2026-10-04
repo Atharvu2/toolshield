@@ -1,3 +1,5 @@
-from backend.toolshield.api.app import app
+import sys
+import os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-# Vercel requires the app to be in an `api` directory at the root
+from backend.toolshield.api.app import app
