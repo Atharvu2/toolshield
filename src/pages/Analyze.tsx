@@ -35,24 +35,11 @@ export default function Analyze() {
     setScannedFileName(file.name);
 
     try {
-      // First try instant client-side scanning in the browser
       const clientFindings = await scanZipFile(file);
       setFindings(clientFindings);
     } catch (err: any) {
-      // Fallback to server API if zip parsing fails
-      try {
-        const formData = new FormData();
-        formData.append('file', file);
-        const res = await fetch('/api/analyze', {
-          method: 'POST',
-          body: formData,
-        });
-        const data = await res.json();
-        if (data.error) setError(data.error);
-        else setFindings(data.findings || []);
-      } catch (backendErr: any) {
-        setError(err.message || 'Failed to scan repository zip file');
-      }
+      console.error('Scan error:', err);
+      setError(err.message || 'Failed to scan repository ZIP file. Please ensure it contains a valid GitHub repository.');
     } finally {
       setRunning(false);
     }
