@@ -1,4 +1,4 @@
-﻿from backend.toolshield.scanning.scanner import scan_repo, parse_agents_file, can_trigger, parse_workflow, matches_trigger, is_privileged_job
+from backend.toolshield.scanning.scanner import scan_repo, parse_agents_file, can_trigger, parse_workflow, matches_trigger, is_privileged_job
 from pathlib import Path
 
 p = Path("fixtures/A1-comment")

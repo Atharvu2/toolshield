@@ -1,4 +1,4 @@
-﻿import typer
+import typer
 from rich.console import Console
 from rich.json import JSON
 from pathlib import Path

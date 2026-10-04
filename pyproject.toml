@@ -1,4 +1,4 @@
-﻿[project]
+[project]
 name = "toolshield"
 version = "0.1.0"
 description = "Agent-mediated cross-workflow authority escalation detection for GitHub Actions"
