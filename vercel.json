@@ -1,34 +1,19 @@
 ﻿{
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "services": {
-    "toolshield": {
-      "root": ".",
-      "framework": "fastapi",
-      "buildCommand": "./build.sh"
-    },
-    "frontend": {
-      "root": "frontend",
-      "framework": "vite"
-    }
-  },
+  "buildCommand": "cd frontend && npm install && npm run build",
+  "outputDirectory": "frontend/dist",
+  "framework": "vite",
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": {
-        "service": "toolshield"
-      }
+      "destination": "/api/index.py"
     },
     {
       "source": "/health",
-      "destination": {
-        "service": "toolshield"
-      }
+      "destination": "/api/index.py"
     },
     {
       "source": "/(.*)",
-      "destination": {
-        "service": "frontend"
-      }
+      "destination": "/$1"
     }
   ]
 }
