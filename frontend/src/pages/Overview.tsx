@@ -110,7 +110,7 @@ export default function Overview() {
             zoomOnScroll={false}
             nodesDraggable={false}
           >
-            <Background color="#0E1413" gap={16} size={1} opacity={0.05} />
+            <Background color="#0E1413" gap={16} size={1}  />
           </ReactFlow>
         </div>
         
