@@ -1,0 +1,10 @@
+name: Privileged
+on: issue_comment
+jobs:
+  privileged:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    if: github.actor == 'admin'
+    steps:
+      - run: echo "PRIVILEGED PATH REACHED"

@@ -1,0 +1,12 @@
+name: Privileged CI
+on:
+  pull_request_target:
+    types: [labeled]
+jobs:
+  privileged:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    if: github.event.label.name == 'safe-to-test'
+    steps:
+      - run: echo "PRIVILEGED PATH REACHED"

@@ -1,0 +1,13 @@
+agents:
+  - id: triage-agent
+    workflow: .github/workflows/agent.yml
+    job: triage
+    step: agent
+    identity: github-actions[bot]
+    credential:
+      type: github_token
+      source: GITHUB_TOKEN
+    consumes:
+      - issue.comment
+    produces:
+      - issue_comment

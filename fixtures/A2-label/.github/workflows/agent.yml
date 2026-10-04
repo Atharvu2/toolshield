@@ -1,0 +1,8 @@
+name: Agent
+on: pull_request
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: agent
+        run: echo "agent"

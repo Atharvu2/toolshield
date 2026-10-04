@@ -1,0 +1,9 @@
+name: Privileged
+on: issue_comment
+jobs:
+  privileged:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "PRIVILEGED PATH REACHED"
+        env:
+          SECRET: ${{ secrets.SUPER_SECRET }}

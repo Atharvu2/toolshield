@@ -1,0 +1,12 @@
+name: Privileged
+on:
+  issue_comment:
+    types: [created]
+jobs:
+  privileged:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    if: github.actor == 'triage-bot[bot]'
+    steps:
+      - run: echo "PRIVILEGED PATH REACHED"

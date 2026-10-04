@@ -1,0 +1,13 @@
+agents:
+  - id: triage-agent
+    workflow: .github/workflows/agent.yml
+    job: triage
+    step: agent
+    identity: triage-bot[bot]
+    credential:
+      type: github_app_installation_token
+      source: AGENT_APP_TOKEN
+    consumes:
+      - issue.body
+    produces:
+      - repository_dispatch

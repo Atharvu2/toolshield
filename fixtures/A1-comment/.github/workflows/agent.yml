@@ -1,0 +1,8 @@
+name: Agent
+on: issue_comment
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: agent
+        run: echo "agent"

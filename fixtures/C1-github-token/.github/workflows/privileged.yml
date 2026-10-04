@@ -1,0 +1,11 @@
+name: Privileged
+on:
+  issue_comment:
+    types: [created]
+jobs:
+  privileged:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - run: echo "PRIVILEGED PATH REACHED"
