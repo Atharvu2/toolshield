@@ -1,4 +1,4 @@
-﻿# ToolShield
+# ToolShield
 
 ToolShield is a static analysis engine designed to detect agent-mediated authority escalation paths in GitHub Actions workflows (Rule: **TSE-001**).
 
@@ -47,6 +47,6 @@ python -m backend.toolshield.cli.main <repository_path>
 - **Graph Model:** Nodes (Actor, Event, Agent, Artifact, Workflow, Job, Sink) and Edges (Consumes, Produces, Triggers, Executes).
 - **Limitations:** Only supports explicit agent definitions (via `agents.yml`). Does not yet handle fully dynamic expression resolution for all GitHub Actions contexts.
 
-## License
 
-MIT License
+
+
